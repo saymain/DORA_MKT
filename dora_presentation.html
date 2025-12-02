@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DORA - 数据流编程革命性框架 | 演示文稿</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全局样式 - 基于网站风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ffcc;
+            --secondary-color: #ff00ff;
+            --accent-color: #00aaff;
+            --bg-dark: #0a0a0f;
+            --bg-medium: #1a1a2e;
+            --bg-light: #2a2a3e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c0;
+            --text-muted: #808090;
+            --gradient-primary: linear-gradient(135deg, #00ffcc, #00aaff);
+            --gradient-secondary: linear-gradient(135deg, #ff00ff, #00ffcc);
+            --glow-color: rgba(0, 255, 204, 0.5);
+            --shadow-glow: 0 0 20px rgba(0, 255, 204, 0.3);
+            --font-orbitron: 'Orbitron', monospace;
+            --font-rajdhani: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-rajdhani);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 网格背景效果 */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 255, 204, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* 演示文稿容器 */
+        .presentation-container {
+            position: relative;
+            z-index: 10;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 幻灯片样式 */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: radial-gradient(circle at center, rgba(26, 26, 46, 0.9) 0%, rgba(10, 10, 15, 1) 100%);
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* 幻灯片布局 */
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 标题样式 */
+        .slide-title {
+            font-family: var(--font-orbitron);
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(0, 255, 204, 0.8)); }
+        }
+
+        /* 副标题样式 */
+        .slide-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* 内容区域 */
+        .slide-body {
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        /* 特性卡片 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid rgba(0, 255, 204, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-family: var(--font-orbitron);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* 统计数据 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            display: block;
+            font-family: var(--font-orbitron);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 架构图 */
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .arch-node {
+            width: 120px;
+            height: 120px;
+            background: rgba(26, 26, 46, 0.9);
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .arch-node:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .node-icon {
+            font-size: 2rem;
+        }
+
+        .node-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .data-bus {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: translateY(-50%);
+            z-index: 1;
+            border-radius: 2px;
+        }
+
+        /* 导航控制 */
+        .presentation-nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.9);
+            padding: 1rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 25px;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-family: var(--font-rajdhani);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 255, 204, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* 幻灯片指示器 */
+        .slide-indicators {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 255, 204, 0.3);
+            border: 1px solid var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Logo和品牌 */
+        .slide-header {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            animation: robot-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes robot-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .logo-text {
+            font-family: var(--font-orbitron);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+        }
+
+        /* 列表样式 */
+        .feature-list {
+            text-align: left;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .feature-list li {
+            padding: 1rem;
+            margin: 1rem 0;
+            background: rgba(26, 26, 46, 0.6);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            background: rgba(26, 26, 46, 0.9);
+            transform: translateX(10px);
+        }
+
+        /* 按钮样式 */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-rajdhani);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.5);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-indicators {
+                right: 1rem;
+            }
+
+            .presentation-nav {
+                bottom: 1rem;
+                padding: 0.75rem;
+            }
+
+            .nav-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+
+    <div class="presentation-container">
+        <!-- 幻灯片1: 标题页 -->
+        <div class="slide active" id="slide1">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">数据流编程革命</h1>
+                <h2 class="slide-subtitle">面向现代机器人应用的高性能数据流中间件</h2>
+                <div class="slide-body">
+                    <p style="font-size: 1.5rem; margin-bottom: 2rem;">
+                        基于 Rust 构建 • 比ROS2快10-17倍 • 4000+预置节点
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">10-17x</span>
+                            <span class="stat-label">性能提升</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4000+</span>
+                            <span class="stat-label">预置节点</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">10μs</span>
+                            <span class="stat-label">超低延迟</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 幻灯片2: 为什么选择DORA -->
+        <div class="slide" id="slide2">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">为什么选择 DORA？</h1>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">极致性能</h3>
+                        <p>纯Rust实现，比ROS2快10-17倍，零拷贝数据传输，延迟极低，支持GPU加速</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧩</div>
+                        <h3 class="feature-title">模块化架构</h3>
+                        <p>基于数据流范式的声明式设计，独立进程节点，系统更稳定，易于配置和扩展</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3 class="feature-title">开箱即用</h3>
+                        <p>4000+个预置节点，覆盖视觉、感知、控制等，支持YOLO、MediaPipe、PyTorch等主流AI框架</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 幻灯片3: 技术架构 -->
+        <div class="slide" id="slide3">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">技术架构</h1>
+                <h2 class="slide-subtitle">基于Apache Arrow的高效数据传递</h2>
+                <div class="architecture-diagram">
+                    <div class="data-bus"></div>
+                    <div class="arch-node">
+                        <div class="node-icon">📷</div>
+                        <span class="node-label">数据源</span>
+                    </div>
+                    <div class="arch-node">
+                        <div class="node-icon">⚙️</div>
+                        <span class="node-label">处理节点</span>
+                    </div>
+                    <div class="arch-node">
+                        <div class="node-icon">🎯</div>
+                        <span class="node-label">输出节点</span>
+                    </div>
+                    <div class="arch-node">
+                        <div class="node-icon">📊</div>
+                        <span class="node-label">监控</span>
+                    </div>
+                </div>
+                <div class="slide-body">
+                    <div class="features-grid" style="margin-top: 3rem;">
+                        <div class="feature-card">
+                            <h3 class="feature-title">Apache Arrow</h3>
+                            <p>零序列化数据格式</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3 class="feature-title">Zenoh</h3>
+                            <p>分布式通信协议</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3 class="feature-title">OpenTelemetry</h3>
+                            <p>可观测性标准</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 幻灯片4: 应用场景 -->
+        <div class="slide" id="slide4">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">应用场景</h1>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📷</div>
+                        <h3 class="feature-title">计算机视觉</h3>
+                        <ul class="feature-list">
+                            <li>目标检测与识别</li>
+                            <li>图像分割与分类</li>
+                            <li>人脸识别与跟踪</li>
+                            <li>3D视觉处理</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3 class="feature-title">机器人控制</h3>
+                        <ul class="feature-list">
+                            <li>自主导航与路径规划</li>
+                            <li>多传感器数据融合</li>
+                            <li>运动控制与规划</li>
+                            <li>人机交互</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 幻灯片5: AI集成 -->
+        <div class="slide" id="slide5">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">AI 框架集成</h1>
+                <div class="slide-body">
+                    <p style="font-size: 1.3rem; margin-bottom: 2rem;">
+                        DORA 无缝集成主流AI框架，让您轻松构建智能机器人应用
+                    </p>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🧠</div>
+                            <h3 class="feature-title">深度学习</h3>
+                            <ul class="feature-list">
+                                <li>PyTorch 模型部署</li>
+                                <li>TensorFlow 集成</li>
+                                <li>大语言模型交互</li>
+                                <li>强化学习应用</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔍</div>
+                            <h3 class="feature-title">计算机视觉</h3>
+                            <ul class="feature-list">
+                                <li>YOLO 目标检测</li>
+                                <li>MediaPipe 处理</li>
+                                <li>OpenCV 集成</li>
+                                <li>3D 重建</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 幻灯片6: 快速开始 -->
+        <div class="slide" id="slide6">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">快速开始</h1>
+                <h2 class="slide-subtitle">几分钟内构建你的第一个数据流应用</h2>
+                <div class="slide-body">
+                    <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--primary-color); font-family: var(--font-orbitron);">1. 安装</h3>
+                            <div style="background: rgba(26, 26, 46, 0.8); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                                <code style="color: var(--text-primary); font-family: monospace;">
+                                    pip install dora-rs-cli<br>
+                                    # 或 cargo install dora-cli
+                                </code>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--primary-color); font-family: var(--font-orbitron);">2. 运行示例</h3>
+                            <div style="background: rgba(26, 26, 46, 0.8); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                                <code style="color: var(--text-primary); font-family: monospace;">
+                                    dora build yolo.yml --uv<br>
+                                    dora run yolo.yml --uv
+                                </code>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 style="color: var(--primary-color); font-family: var(--font-orbitron);">3. 构建数据流</h3>
+                            <div style="background: rgba(26, 26, 46, 0.8); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                                <code style="color: var(--text-primary); font-family: monospace; font-size: 0.9rem;">
+                                    import dora<br>
+                                    with dora.Builder() as builder:<br>
+                                    &nbsp;&nbsp;camera = builder.node("opencv-video-capture")<br>
+                                    &nbsp;&nbsp;yolo = builder.node("dora-yolo")<br>
+                                    &nbsp;&nbsp;camera.output("image").to(yolo.input("image"))
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 幻灯片7: 平台支持 -->
+        <div class="slide" id="slide7">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">平台支持</h1>
+                <h2 class="slide-subtitle">跨平台兼容，多种语言支持</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">操作系统</h3>
+                        <ul class="feature-list">
+                            <li>✅ Linux - 完全支持</li>
+                            <li>🆗 Windows - 支持</li>
+                            <li>✅ macOS - 完全支持</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">编程语言</h3>
+                        <ul class="feature-list">
+                            <li>⭐ Python - 推荐</li>
+                            <li>✅ Rust - 完全支持</li>
+                            <li>🆗 C/C++ - 最佳努力</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 幻灯片8: 总结与行动号召 -->
+        <div class="slide" id="slide8">
+            <div class="slide-header">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <div class="slide-content">
+                <h1 class="slide-title">开启您的机器人之旅</h1>
+                <div class="slide-body">
+                    <p style="font-size: 1.5rem; margin-bottom: 2rem;">
+                        选择 DORA，体验下一代机器人开发框架的强大功能
+                    </p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">🚀</span>
+                            <span class="stat-label">极高性能</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">🧩</span>
+                            <span class="stat-label">模块化</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">🤖</span>
+                            <span class="stat-label">开箱即用</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem;">
+                        <a href="https://github.com/dora-rs/dora" target="_blank" class="cta-button">
+                            访问 GitHub
+                        </a>
+                        <a href="#" class="cta-button">
+                            查看文档
+                        </a>
+                    </div>
+
+                    <p style="margin-top: 2rem; color: var(--text-secondary);">
+                        Apache-2.0 License • 开源免费 • 社区驱动
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导航控制 -->
+    <div class="presentation-nav">
+        <button class="nav-btn" onclick="changeSlide(-1)">← 上一页</button>
+        <button class="nav-btn" onclick="toggleFullscreen()">全屏</button>
+        <button class="nav-btn" onclick="changeSlide(1)">下一页 →</button>
+    </div>
+
+    <!-- 幻灯片指示器 -->
+    <div class="slide-indicators">
+        <div class="indicator active" onclick="goToSlide(1)"></div>
+        <div class="indicator" onclick="goToSlide(2)"></div>
+        <div class="indicator" onclick="goToSlide(3)"></div>
+        <div class="indicator" onclick="goToSlide(4)"></div>
+        <div class="indicator" onclick="goToSlide(5)"></div>
+        <div class="indicator" onclick="goToSlide(6)"></div>
+        <div class="indicator" onclick="goToSlide(7)"></div>
+        <div class="indicator" onclick="goToSlide(8)"></div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(1);
+            setupKeyboardNavigation();
+            setupTouchNavigation();
+        });
+
+        // 显示指定幻灯片
+        function showSlide(slideNumber) {
+            // 隐藏所有幻灯片
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // 显示当前幻灯片
+            const currentSlideElement = document.getElementById(`slide${slideNumber}`);
+            if (currentSlideElement) {
+                currentSlideElement.classList.add('active');
+            }
+
+            // 更新指示器
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === slideNumber - 1);
+            });
+
+            currentSlide = slideNumber;
+        }
+
+        // 切换幻灯片
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 1 && newSlide <= totalSlides) {
+                showSlide(newSlide);
+            }
+        }
+
+        // 跳转到指定幻灯片
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                showSlide(slideNumber);
+            }
+        }
+
+        // 键盘导航
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        changeSlide(-1);
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                    case ' ':
+                        e.preventDefault();
+                        changeSlide(1);
+                        break;
+                    case 'Escape':
+                        if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                        }
+                        break;
+                    case 'f':
+                    case 'F':
+                        toggleFullscreen();
+                        break;
+                    case 'Home':
+                        goToSlide(1);
+                        break;
+                    case 'End':
+                        goToSlide(totalSlides);
+                        break;
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                        goToSlide(parseInt(e.key));
+                        break;
+                }
+            });
+        }
+
+        // 触摸导航
+        function setupTouchNavigation() {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let touchStartY = 0;
+            let touchEndY = 0;
+
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            });
+
+            document.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > swipeThreshold) {
+                    if (diffX > 0) {
+                        // 向左滑动 - 下一页
+                        changeSlide(1);
+                    } else {
+                        // 向右滑动 - 上一页
+                        changeSlide(-1);
+                    }
+                }
+            }
+        }
+
+        // 全屏切换
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`无法进入全屏模式: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // 自动播放功能（可选）
+        let autoPlayInterval;
+        let isAutoPlaying = false;
+
+        function toggleAutoPlay() {
+            if (isAutoPlaying) {
+                clearInterval(autoPlayInterval);
+                isAutoPlaying = false;
+            } else {
+                autoPlayInterval = setInterval(() => {
+                    if (currentSlide < totalSlides) {
+                        changeSlide(1);
+                    } else {
+                        goToSlide(1); // 循环播放
+                    }
+                }, 5000); // 5秒切换
+                isAutoPlaying = true;
+            }
+        }
+
+        // 添加幻灯片切换动画
+        function animateSlideIn(slideElement) {
+            slideElement.style.opacity = '0';
+            slideElement.style.transform = 'translateX(100px)';
+
+            setTimeout(() => {
+                slideElement.style.transition = 'all 0.5s ease-out';
+                slideElement.style.opacity = '1';
+                slideElement.style.transform = 'translateX(0)';
+            }, 50);
+        }
+
+        // 打印功能
+        function printPresentation() {
+            window.print();
+        }
+
+        // 添加打印样式
+        const printStyles = document.createElement('style');
+        printStyles.textContent = `
+            @media print {
+                .presentation-nav,
+                .slide-indicators {
+                    display: none !important;
+                }
+
+                .slide {
+                    page-break-after: always;
+                    display: block !important;
+                }
+            }
+        `;
+        document.head.appendChild(printStyles);
+    </script>
+</body>
+</html>

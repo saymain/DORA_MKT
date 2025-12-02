@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "Bash(python:*)",
+      "Bash(findstr:*)",
+      "Bash(curl:*)",
+      "Bash(start index.html)",
+      "Bash(dir:*)",
+      "Bash(start:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

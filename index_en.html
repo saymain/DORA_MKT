@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DORA - Dataflow-Oriented Robotic Architecture | Dataflow Programming Revolution</title>
+    <meta name="description" content="DORA is a Rust-based high-performance dataflow middleware designed for modern robotics applications. 10-17x faster than ROS2, supports 4000+ pre-built nodes.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="particles"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#architecture" class="nav-link">Architecture</a></li>
+                <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
+                <li><a href="#getting-started" class="nav-link">Getting Started</a></li>
+                <li><a href="https://github.com/dora-rs/dora" target="_blank" class="nav-link github">GitHub</a></li>
+            </ul>
+            <div class="language-switcher">
+                <a href="index.html" class="lang-btn active">中文</a>
+                <a href="index_en.html" class="lang-btn">EN</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">⚡</span>
+                    <span class="badge-text">Next-generation Robotics Framework Built on Rust</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Dataflow Programming</span>
+                    <span class="title-line highlight">Revolutionary Framework</span>
+                </h1>
+                <p class="hero-subtitle">
+                    DORA is a high-performance dataflow middleware designed for modern robotics applications<br>
+                    <span class="highlight-text">10-17x faster than ROS2</span> • 4000+ pre-built nodes • Zero-copy data transfer
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="10">0</span>
+                        <span class="stat-label">x Performance Boost</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="4000">0</span>
+                        <span class="stat-label">Pre-built Nodes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="10">0</span>
+                        <span class="stat-label">Latency (μs)</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#getting-started" class="btn-primary">
+                        <span class="btn-icon">🚀</span>
+                        Get Started
+                    </a>
+                    <button class="btn-secondary" onclick="window.open('https://github.com/dora-rs/dora', '_blank')">
+                        <span class="btn-icon">📖</span>
+                        View Documentation
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="robot-container">
+                    <div class="robot-head">
+                        <div class="robot-eye left"></div>
+                        <div class="robot-eye right"></div>
+                        <div class="robot-mouth"></div>
+                    </div>
+                    <div class="data-flow">
+                        <div class="flow-node" data-node="1">Input</div>
+                        <div class="flow-line"></div>
+                        <div class="flow-node" data-node="2">Process</div>
+                        <div class="flow-line"></div>
+                        <div class="flow-node" data-node="3">Output</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose DORA?</h2>
+                <p class="section-subtitle">Revolutionary performance and developer experience</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-feature="performance">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Extreme Performance</h3>
+                    <p class="feature-description">Pure Rust implementation, 10-17x faster than ROS2, zero-copy data transfer, ultra-low latency, GPU acceleration support</p>
+                    <div class="feature-metrics">
+                        <span class="metric">10-17x Faster</span>
+                        <span class="metric">Zero-Copy</span>
+                        <span class="metric">Microsecond Latency</span>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="modular">
+                    <div class="feature-icon">🧩</div>
+                    <h3 class="feature-title">Modular Architecture</h3>
+                    <p class="feature-description">Declarative design based on dataflow paradigm, independent process nodes, system stability, easy configuration and extension</p>
+                    <div class="feature-metrics">
+                        <span class="metric">Dataflow Paradigm</span>
+                        <span class="metric">Independent Processes</span>
+                        <span class="metric">Declarative Config</span>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="ready">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">Ready to Use</h3>
+                    <p class="feature-description">4000+ pre-built nodes covering vision, perception, control, supports YOLO, MediaPipe, PyTorch and other mainstream AI frameworks</p>
+                    <div class="feature-metrics">
+                        <span class="metric">4000+ Nodes</span>
+                        <span class="metric">AI Integration</span>
+                        <span class="metric">Hardware Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Architecture</h2>
+                <p class="section-subtitle">Efficient data transmission based on Apache Arrow</p>
+            </div>
+            <div class="architecture-diagram">
+                <div class="arch-node source" data-node="input">
+                    <div class="node-icon">📷</div>
+                    <span class="node-label">Data Source</span>
+                </div>
+                <div class="arch-node process" data-node="process">
+                    <div class="node-icon">⚙️</div>
+                    <span class="node-label">Processing Node</span>
+                </div>
+                <div class="arch-node output" data-node="output">
+                    <div class="node-icon">🎯</div>
+                    <span class="node-label">Output Node</span>
+                </div>
+                <div class="arch-node monitor" data-node="monitor">
+                    <div class="node-icon">📊</div>
+                    <span class="node-label">Monitoring</span>
+                </div>
+                <div class="data-bus">
+                    <span class="bus-label">DORA Data Bus</span>
+                </div>
+            </div>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <span class="tech-name">Apache Arrow</span>
+                    <span class="tech-desc">Zero-serialization data format</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-name">Zenoh</span>
+                    <span class="tech-desc">Distributed communication protocol</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-name">OpenTelemetry</span>
+                    <span class="tech-desc">Observability standard</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Use Cases</h2>
+                <p class="section-subtitle">Suitable for various robotics application scenarios</p>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">📷</div>
+                    <h3 class="use-case-title">Computer Vision</h3>
+                    <ul class="use-case-list">
+                        <li>Object Detection & Recognition</li>
+                        <li>Image Segmentation & Classification</li>
+                        <li>Facial Recognition & Tracking</li>
+                        <li>3D Vision Processing</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🤖</div>
+                    <h3 class="use-case-title">Robot Control</h3>
+                    <ul class="use-case-list">
+                        <li>Autonomous Navigation & Path Planning</li>
+                        <li>Multi-sensor Data Fusion</li>
+                        <li>Motion Control & Planning</li>
+                        <li>Human-Robot Interaction</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🏭</div>
+                    <h3 class="use-case-title">Industrial Automation</h3>
+                    <ul class="use-case-list">
+                        <li>Quality Inspection & Defect Detection</li>
+                        <li>Equipment Monitoring & Predictive Maintenance</li>
+                        <li>Automated Production Line Control</li>
+                        <li>Material Handling & Sorting</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🧠</div>
+                    <h3 class="use-case-title">AI Integration</h3>
+                    <ul class="use-case-list">
+                        <li>PyTorch/TensorFlow Model Deployment</li>
+                        <li>Large Language Model Interaction</li>
+                        <li>Reinforcement Learning Applications</li>
+                        <li>Multimodal AI Systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section id="getting-started" class="getting-started">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Quick Start</h2>
+                <p class="section-subtitle">Build your first dataflow application in minutes</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-card" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Install</h3>
+                        <div class="code-block">
+                            <pre><code># Install CLI tool with pip
+pip install dora-rs-cli
+
+# Or use cargo
+cargo install dora-cli</code></pre>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Run Examples</h3>
+                        <div class="code-block">
+                            <pre><code># Create virtual environment
+uv venv --seed -p 3.11
+
+# Build and run YOLO object detection example
+dora build https://raw.githubusercontent.com/dora-rs/dora/main/examples/object-detection/yolo.yml --uv
+dora run yolo.yml --uv</code></pre>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Build Dataflows</h3>
+                        <div class="code-block">
+                            <pre><code>import dora
+
+with dora.Builder() as builder:
+    camera = builder.node("opencv-video-capture")
+    yolo = builder.node("dora-yolo")
+    visualizer = builder.node("dora-rerun")
+
+    camera.output("image").to(yolo.input("image"))
+    yolo.output("bbox").to(visualizer.input("boxes2d"))
+    camera.output("image").to(visualizer.input("image"))</code></pre>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Matrix Section -->
+    <section class="support-matrix">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Platform Support</h2>
+                <p class="section-subtitle">Cross-platform compatibility with multi-language support</p>
+            </div>
+            <div class="support-grid">
+                <div class="support-section">
+                    <h3 class="support-section-title">Operating Systems</h3>
+                    <div class="support-list">
+                        <div class="support-item full">
+                            <span class="support-name">Linux</span>
+                            <span class="support-status full">✅ Full Support</span>
+                        </div>
+                        <div class="support-item partial">
+                            <span class="support-name">Windows</span>
+                            <span class="support-status partial">🆗 Supported</span>
+                        </div>
+                        <div class="support-item full">
+                            <span class="support-name">macOS</span>
+                            <span class="support-status full">✅ Full Support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="support-section">
+                    <h3 class="support-section-title">Programming Languages</h3>
+                    <div class="support-list">
+                        <div class="support-item recommended">
+                            <span class="support-name">Python</span>
+                            <span class="support-status recommended">⭐ Recommended</span>
+                        </div>
+                        <div class="support-item full">
+                            <span class="support-name">Rust</span>
+                            <span class="support-status full">✅ Full Support</span>
+                        </div>
+                        <div class="support-item partial">
+                            <span class="support-name">C/C++</span>
+                            <span class="support-status partial">🆗 Best Effort</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🤖</span>
+                        <span class="logo-text">DORA</span>
+                    </div>
+                    <p class="footer-description">Making robotics application development simple and powerful</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/dora-rs/dora" target="_blank" class="social-link">GitHub</a>
+                        <a href="#" class="social-link">Discord</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#getting-started">Quick Start</a></li>
+                        <li><a href="#documentation">Documentation</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                        <li><a href="#api">API Reference</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/dora-rs/dora/issues">GitHub Issues</a></li>
+                        <li><a href="https://github.com/dora-rs/dora/discussions">Discussions</a></li>
+                        <li><a href="#contribute">Contributing Guide</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Project</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/dora-rs/dora">Source Code</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="#changelog">Changelog</a></li>
+                        <li><a href="#license">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DORA. Apache-2.0 License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

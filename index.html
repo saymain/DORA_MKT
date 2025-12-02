@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DORA - 面向机器人的架构 | 数据流编程革命</title>
+    <meta name="description" content="DORA是基于Rust的高性能数据流中间件，专为现代机器人应用设计。比ROS2快10-17倍，支持4000+预置节点。">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="particles"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🤖</span>
+                <span class="logo-text">DORA</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">特性</a></li>
+                <li><a href="#architecture" class="nav-link">架构</a></li>
+                <li><a href="#use-cases" class="nav-link">应用场景</a></li>
+                <li><a href="#getting-started" class="nav-link">开始使用</a></li>
+                <li><a href="https://github.com/dora-rs/dora" target="_blank" class="nav-link github">GitHub</a></li>
+            </ul>
+            <div class="language-switcher">
+                <a href="index.html" class="lang-btn active">中文</a>
+                <a href="index_en.html" class="lang-btn">EN</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主英雄区域 -->
+    <section id="hero" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">⚡</span>
+                    <span class="badge-text">基于Rust的下一代机器人框架</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">数据流编程</span>
+                    <span class="title-line highlight">革命性框架</span>
+                </h1>
+                <p class="hero-subtitle">
+                    DORA是专为现代机器人应用设计的高性能数据流中间件<br>
+                    <span class="highlight-text">比ROS2快10-17倍</span> • 4000+预置节点 • 零拷贝传输
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="10">0</span>
+                        <span class="stat-label">倍性能提升</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="4000">0</span>
+                        <span class="stat-label">预置节点</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="10">0</span>
+                        <span class="stat-label">延迟(微秒)</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#getting-started" class="btn-primary">
+                        <span class="btn-icon">🚀</span>
+                        立即开始
+                    </a>
+                    <button class="btn-secondary" onclick="window.open('https://github.com/dora-rs/dora', '_blank')">
+                        <span class="btn-icon">📖</span>
+                        查看文档
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="robot-container">
+                    <div class="robot-head">
+                        <div class="robot-eye left"></div>
+                        <div class="robot-eye right"></div>
+                        <div class="robot-mouth"></div>
+                    </div>
+                    <div class="data-flow">
+                        <div class="flow-node" data-node="1">输入</div>
+                        <div class="flow-line"></div>
+                        <div class="flow-node" data-node="2">处理</div>
+                        <div class="flow-line"></div>
+                        <div class="flow-node" data-node="3">输出</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性区域 -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">为什么选择DORA？</h2>
+                <p class="section-subtitle">革命性的性能和开发者体验</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-feature="performance">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">极致性能</h3>
+                    <p class="feature-description">纯Rust实现，比ROS2快10-17倍，零拷贝数据传输，延迟极低，支持GPU加速</p>
+                    <div class="feature-metrics">
+                        <span class="metric">10-17x 更快</span>
+                        <span class="metric">零拷贝</span>
+                        <span class="metric">微秒延迟</span>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="modular">
+                    <div class="feature-icon">🧩</div>
+                    <h3 class="feature-title">模块化架构</h3>
+                    <p class="feature-description">基于数据流范式的声明式设计，独立进程节点，系统更稳定，易于配置和扩展</p>
+                    <div class="feature-metrics">
+                        <span class="metric">数据流范式</span>
+                        <span class="metric">独立进程</span>
+                        <span class="metric">声明式配置</span>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="ready">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">开箱即用</h3>
+                    <p class="feature-description">4000+个预置节点，覆盖视觉、感知、控制等，支持YOLO、MediaPipe、PyTorch等主流AI框架</p>
+                    <div class="feature-metrics">
+                        <span class="metric">4000+节点</span>
+                        <span class="metric">AI集成</span>
+                        <span class="metric">硬件支持</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 架构展示 -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">技术架构</h2>
+                <p class="section-subtitle">基于Apache Arrow的高效数据传递</p>
+            </div>
+            <div class="architecture-diagram">
+                <div class="arch-node source" data-node="input">
+                    <div class="node-icon">📷</div>
+                    <span class="node-label">数据源</span>
+                </div>
+                <div class="arch-node process" data-node="process">
+                    <div class="node-icon">⚙️</div>
+                    <span class="node-label">处理节点</span>
+                </div>
+                <div class="arch-node output" data-node="output">
+                    <div class="node-icon">🎯</div>
+                    <span class="node-label">输出节点</span>
+                </div>
+                <div class="arch-node monitor" data-node="monitor">
+                    <div class="node-icon">📊</div>
+                    <span class="node-label">监控</span>
+                </div>
+                <div class="data-bus">
+                    <span class="bus-label">DORA数据总线</span>
+                </div>
+            </div>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <span class="tech-name">Apache Arrow</span>
+                    <span class="tech-desc">零序列化数据格式</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-name">Zenoh</span>
+                    <span class="tech-desc">分布式通信协议</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-name">OpenTelemetry</span>
+                    <span class="tech-desc">可观测性标准</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用场景 -->
+    <section id="use-cases" class="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">应用场景</h2>
+                <p class="section-subtitle">适用于各种机器人应用场景</p>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">📷</div>
+                    <h3 class="use-case-title">计算机视觉</h3>
+                    <ul class="use-case-list">
+                        <li>目标检测与识别</li>
+                        <li>图像分割与分类</li>
+                        <li>人脸识别与跟踪</li>
+                        <li>3D视觉处理</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🤖</div>
+                    <h3 class="use-case-title">机器人控制</h3>
+                    <ul class="use-case-list">
+                        <li>自主导航与路径规划</li>
+                        <li>多传感器数据融合</li>
+                        <li>运动控制与规划</li>
+                        <li>人机交互</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🏭</div>
+                    <h3 class="use-case-title">工业自动化</h3>
+                    <ul class="use-case-list">
+                        <li>质量检测与缺陷识别</li>
+                        <li>设备监控与预测维护</li>
+                        <li>自动化生产线控制</li>
+                        <li>物料搬运与分拣</li>
+                    </ul>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🧠</div>
+                    <h3 class="use-case-title">AI集成</h3>
+                    <ul class="use-case-list">
+                        <li>PyTorch/TensorFlow模型部署</li>
+                        <li>大语言模型交互</li>
+                        <li>强化学习应用</li>
+                        <li>多模态AI系统</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速开始 -->
+    <section id="getting-started" class="getting-started">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">快速开始</h2>
+                <p class="section-subtitle">几分钟内构建你的第一个数据流应用</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-card" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">安装</h3>
+                        <div class="code-block">
+                            <pre><code># 使用pip安装CLI工具
+pip install dora-rs-cli
+
+# 或者使用cargo
+cargo install dora-cli</code></pre>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">运行示例</h3>
+                        <div class="code-block">
+                            <pre><code># 创建虚拟环境
+uv venv --seed -p 3.11
+
+# 构建并运行YOLO目标检测示例
+dora build https://raw.githubusercontent.com/dora-rs/dora/main/examples/object-detection/yolo.yml --uv
+dora run yolo.yml --uv</code></pre>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">构建数据流</h3>
+                        <div class="code-block">
+                            <pre><code>import dora
+
+with dora.Builder() as builder:
+    camera = builder.node("opencv-video-capture")
+    yolo = builder.node("dora-yolo")
+    visualizer = builder.node("dora-rerun")
+
+    camera.output("image").to(yolo.input("image"))
+    yolo.output("bbox").to(visualizer.input("boxes2d"))
+    camera.output("image").to(visualizer.input("image"))</code></pre>
+                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持矩阵 -->
+    <section class="support-matrix">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">平台支持</h2>
+                <p class="section-subtitle">跨平台兼容，多种语言支持</p>
+            </div>
+            <div class="support-grid">
+                <div class="support-section">
+                    <h3 class="support-section-title">操作系统</h3>
+                    <div class="support-list">
+                        <div class="support-item full">
+                            <span class="support-name">Linux</span>
+                            <span class="support-status full">✅ 完全支持</span>
+                        </div>
+                        <div class="support-item partial">
+                            <span class="support-name">Windows</span>
+                            <span class="support-status partial">🆗 支持</span>
+                        </div>
+                        <div class="support-item full">
+                            <span class="support-name">macOS</span>
+                            <span class="support-status full">✅ 完全支持</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="support-section">
+                    <h3 class="support-section-title">编程语言</h3>
+                    <div class="support-list">
+                        <div class="support-item recommended">
+                            <span class="support-name">Python</span>
+                            <span class="support-status recommended">⭐ 推荐</span>
+                        </div>
+                        <div class="support-item full">
+                            <span class="support-name">Rust</span>
+                            <span class="support-status full">✅ 完全支持</span>
+                        </div>
+                        <div class="support-item partial">
+                            <span class="support-name">C/C++</span>
+                            <span class="support-status partial">🆗 最佳努力</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🤖</span>
+                        <span class="logo-text">DORA</span>
+                    </div>
+                    <p class="footer-description">让机器人应用开发变得简单而强大</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/dora-rs/dora" target="_blank" class="social-link">GitHub</a>
+                        <a href="#" class="social-link">Discord</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">资源</h4>
+                    <ul class="footer-links">
+                        <li><a href="#getting-started">快速开始</a></li>
+                        <li><a href="#documentation">文档</a></li>
+                        <li><a href="#examples">示例</a></li>
+                        <li><a href="#api">API参考</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">社区</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/dora-rs/dora/issues">GitHub Issues</a></li>
+                        <li><a href="https://github.com/dora-rs/dora/discussions">Discussions</a></li>
+                        <li><a href="#contribute">贡献指南</a></li>
+                        <li><a href="#blog">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">项目</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/dora-rs/dora">源代码</a></li>
+                        <li><a href="#roadmap">路线图</a></li>
+                        <li><a href="#changelog">更新日志</a></li>
+                        <li><a href="#license">许可证</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DORA. Apache-2.0 License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
